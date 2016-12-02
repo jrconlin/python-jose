@@ -1,3 +1,5 @@
 pycrypto
 six
 future
+pyasn1==0.1.9
+pyelliptic==1.5.7
