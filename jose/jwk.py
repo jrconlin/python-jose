@@ -329,7 +329,6 @@ class ECKey_clib(Key):
             return
         raise JWKError('Unable to parse an ECKey from key: %s' % key)
 
-
     def repad(self, st):
         """Add base64 padding back to the end of a stripped character
         sequence
@@ -354,7 +353,7 @@ class ECKey_clib(Key):
 
     def asn_to_raw(self, candidate, curve):
         """Extract the ASN1 information and return the curve and key pairs."""
-        decoded = base64.b64decode(self.repad(candidate))
+        decoded = base64.urlsafe_b64decode(self.repad(candidate))
 
         # if it's already raw... (Most likely a public key)
         if len(decoded) == 64:
@@ -523,8 +522,9 @@ class ECKey_py(Key):
     def verify(self, msg, sig):
         try:
             return self.prepared_key.verify(sig, msg, hashfunc=self.hash_alg, sigdecode=ecdsa.util.sigdecode_string)
-        except Exception as ex:
+        except Exception:
             return False
+
 
 if os.environ.get('JOSE_USE_PYTHON', False):
     ECKey = ECKey_py
