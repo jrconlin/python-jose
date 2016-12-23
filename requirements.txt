@@ -2,4 +2,4 @@ pycrypto
 six
 future
 pyasn1==0.1.9
-pyelliptic==1.6.0
+-e git+https://github.com/jrconlin/pyelliptic.git@648ddf2b7eae196c5fc81c25bf13d858e1a048e7#egg=pyelliptic
